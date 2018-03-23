@@ -1,0 +1,11 @@
+nvm install 8.8.1 && nvm use 8.8.1
+\curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/meteor.sh | bash -s
+meteor npm install
+meteor add angular2-compilers
+meteor remove angular2-compilers
+meteor build --headless --directory ~/build
+mv ./baobab/build_assets/ ~/build/
+ls -A1 | xargs rm -rf
+mv ~/build/bundle/* ~/build/bundle/.[!.]* .
+mv ~/build/build_assets/* ~/build/build_assets/.[!.]* .
+cd ./programs/server && npm i
